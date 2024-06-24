@@ -1,0 +1,79 @@
+Pre-requsite: xampp,composer (type 'composer' in cmd to check if its installed).
+
+Create a laravel project: (in cmd)
+composer create-project laravel/laravel (projectFolderName)
+
+Start web server: (inside project file and in cmd)
+php artisan serve
+
+Make controller:
+php artisan make:controller (controllerName)
+
+Route:
+file path:app\Providers\RouteServiceProvider.php
+inside that make change:
+(before 'public function boot()')
+protected $namespace= 'App\Http\Controllers';
+
+also in 'public function boot()' inside that in 'Route::middleware('web')' add:
+->namespace($this->namespace)
+
+Clear cache: (in cmd)
+php artisan optimize
+
+
+To run a github project (in gitbash):
+
+1. Clone the git
+2. Go inside the project folder and open git bash again
+3. composer install
+4. cp .env.example .env  /change (.env.example) to (.env)
+5. Go inside the .env file and change the DB name to the appropiate name
+6. Start Apache and MySQL in XAMPP.
+7. php artisan migrate (if migration is set)
+8. php artisan db:seed (if seeder is set)
+9. php artisan key:generate
+10. php artisan storage:link (rare case for most of the project just stop after step 7)
+11. php artisan serve
+
+
+FOR MIGRATION:
+
+Create: php artisan make:migration create_(table_name)_table
+Re-make: php artisan migrate:refresh
+Push to DB: php artisan migrate
+
+
+FOR SEEDER:
+
+Create: php artisan make:seeder (SeederName)
+
+(inside 'DatabaseSeeder.php')->
+public function run()
+    {
+        $this->call(
+            [
+                (SeederName)::class,
+            ]
+        );
+    }
+
+Push to DB: php artisan db:seed
+
+
+
+
+
+Laravel Authentication with Bootstrap:
+1. composer create-project laravel/laravel (projectFolderName)
+[run inside the project directory]
+2. composer require laravel/ui 
+3. php artisan ui bootstrap --auth
+4. npm install (must have nodejs installed)
+5. npm run dev
+6. php artisan migrate (is it shows any error creating the DB, create the DB in mysql first)
+7. php artisan serve
+
+
+
+Live CRUD (ajax and jquery): https://www.youtube.com/playlist?list=PLjsp2uDzfb3378Gsa2EvLns8nuedyKyEh
