@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Calculator</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Simple Calculator</h1>
+        <table class="table table-borderless">
+            <tr>
+                <td>First Number</td>
+                <td>Arithmetic Operation</td>
+                <td>Second Number</td>
+            </tr>
+            <tr>
+                <td><input type="text" class="form-control" name="firstNumber" id="firstNumber"></td>
+                <td>
+                    <select class="form-select" aria-label="Default select example" id="operation">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">*</option>
+                        <option value="/">/</option>
+                    </select>
+                </td>
+                <td><input type="text" class="form-control" name="secondNumber" id="secondNumber"></td>
+            </tr>
+            <tr>
+                <td><button type="button" class="btn btn-primary" id="calculate">Calculate</button></td>
+                <td></td>
+            </tr>
+        </table>
+
+        <div id="resultDiv" class="alert" role="alert">
+            <h4>Result: <span id="result"></span></h4>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+<script>
+    let firstNumber = document.getElementById("firstNumber");
+    let secondNumber = document.getElementById("secondNumber");
+    let calculate = document.getElementById("calculate");
+    let operation = document.getElementById("operation");
+    let result = document.getElementById("result");
+    let resultDiv = document.getElementById("resultDiv");
+
+    calculate.addEventListener("click", function () {
+        let val1 = Number(firstNumber.value);
+        let val2 = Number(secondNumber.value);
+        let val3 = operation.value;
+
+        if (isNaN(val1) || isNaN(val2) || val1 === "" || val2 === "") {
+            resultDiv.classList.toggle("alert-success", false);
+            resultDiv.classList.add("alert-danger");
+            result.innerText = "Please enter valid numbers.";
+        }
+        else {
+            if (val2 === 0 && val3 == '/') {
+                resultDiv.classList.toggle("alert-success", false);
+                resultDiv.classList.add("alert-danger");
+
+                result.innerText = "Division by 0 is not allowed.";
+            }
+            else if (val3 == '+') {
+                resultDiv.classList.toggle("alert-danger", false);
+                resultDiv.classList.add("alert-success");
+
+                result.innerText = val1 + val2;
+            }
+            else if (val3 == '-') {
+                resultDiv.classList.toggle("alert-danger", false);
+                resultDiv.classList.add("alert-success");
+
+                result.innerText = val1 - val2;
+            }
+            else if (val3 == '*') {
+                resultDiv.classList.toggle("alert-danger", false);
+                resultDiv.classList.add("alert-success");
+
+                result.innerText = val1 * val2;
+            }
+            else if (val3 == '/') {
+                resultDiv.classList.toggle("alert-danger", false);
+                resultDiv.classList.add("alert-success");
+
+                result.innerText = val1 / val2;
+            }
+        }
+
+    });
+</script>
+
+</html>
